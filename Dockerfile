@@ -15,7 +15,8 @@ RUN apt-get update && apt-get install -y \
     liblzma-dev \
     libffi-dev \
     uuid-dev \
-    tk8.5-dev
+    tk8.5-dev \
+    curl
 
 WORKDIR /root
 RUN curl -L https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz -o Python-3.8.1.tgz
