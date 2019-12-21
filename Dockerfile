@@ -1,6 +1,6 @@
 FROM ubuntu:18.04
 
-RUN apt-get update && apt get install \
+RUN apt-get update && apt-get install \
     build-essential \
     zlib1g-dev \
     libbz2-dev \
