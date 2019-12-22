@@ -25,7 +25,7 @@ WORKDIR /root/Python-3.8.1
 COPY Setup Modules/Setup
 COPY frozenmain.c Python-3.8.1/Python/frozenmain.c
 RUN ./configure --enable-optimizations
-RUN make
+RUN make -j$(nproc)
 WORKDIR /root
 COPY freeze.sh .
 
