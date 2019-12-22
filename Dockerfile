@@ -2,6 +2,8 @@ FROM ubuntu:18.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+ARG VERSION=3.8.1
+
 RUN apt-get update && apt-get install -y \
     build-essential \
     zlib1g-dev \
@@ -19,11 +21,11 @@ RUN apt-get update && apt-get install -y \
     curl
 
 WORKDIR /root
-RUN curl -L https://www.python.org/ftp/python/3.8.1/Python-3.8.1.tgz -o Python-3.8.1.tgz
-RUN tar -xf Python-3.8.1.tgz
-WORKDIR /root/Python-3.8.1
+RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -o Python-${VERSION}.tgz
+RUN tar -xf Python-${VERSION}.tgz
+WORKDIR /root/Python-${VERSION}
 COPY Setup Modules/Setup
-COPY frozenmain.c Python-3.8.1/Python/frozenmain.c
+COPY frozenmain.c Python/frozenmain.c
 RUN ./configure --enable-optimizations
 RUN make -j$(nproc)
 WORKDIR /root
