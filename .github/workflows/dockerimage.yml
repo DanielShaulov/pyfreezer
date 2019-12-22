@@ -13,5 +13,5 @@ jobs:
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag pyfreezer:latest
-        docker run -v .:/code pyfreezer:latest /code/example.py
+        docker run -v ${PWD}:/code pyfreezer:latest /code/example.py
         ./example
