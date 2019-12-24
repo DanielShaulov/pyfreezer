@@ -20,15 +20,19 @@ RUN apt-get update && apt-get install -y \
     tk8.5-dev \
     curl
 
-WORKDIR /root
+# Regular compilation of python from sources
 RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -o Python-${VERSION}.tgz
 RUN tar -xf Python-${VERSION}.tgz
-WORKDIR /root/Python-${VERSION}
-COPY Setup Modules/Setup
-COPY frozenmain.c Python/frozenmain.c
-RUN ./configure --enable-optimizations
-RUN make -j$(nproc)
-WORKDIR /root
+RUN cd Python-${VERSION} && ./configure --enable-optimizations
+RUN cd Python-${VERSION} && make -j$(nproc)
+
+# Prepare extensions directory with all objects that usually end up in *.so modules
+RUN mkdir ext
+RUN cp -r Python-${VERSION}/build/temp.linux-x86_64-3.8/root/Python-${VERSION}/Modules/* ext/
+RUN cp Python-${VERSION}/Modules/*.o ext/
+COPY Setup ext/Setup
+
+COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
 COPY freeze.sh .
 
 ENTRYPOINT ["/root/freeze.sh"]
