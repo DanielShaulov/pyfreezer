@@ -28,8 +28,7 @@ RUN cd Python-${VERSION} && make -j$(nproc)
 
 # Prepare extensions directory with all objects that usually end up in *.so modules
 RUN mkdir ext
-RUN cp -r Python-${VERSION}/build/temp.linux-x86_64-3.8/root/Python-${VERSION}/Modules/* ext/
-RUN cp Python-${VERSION}/Modules/*.o ext/
+RUN find Python-${VERSION} -type d -name Modules | xargs -i{} bash -c "cp -r {}/* ext/"
 COPY Setup ext/Setup
 
 COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
