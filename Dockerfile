@@ -34,4 +34,4 @@ COPY Setup ext/Setup
 COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
 COPY freeze.sh .
 
-ENTRYPOINT ["freeze.sh"]
+ENTRYPOINT ["/freeze.sh"]
