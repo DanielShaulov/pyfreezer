@@ -23,6 +23,7 @@ RUN apt-get update && apt-get install -y \
 # Regular compilation of python from sources
 RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -o Python-${VERSION}.tgz
 RUN tar -xf Python-${VERSION}.tgz
+COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
 RUN cd Python-${VERSION} && ./configure --enable-optimizations
 RUN cd Python-${VERSION} && make -j$(nproc)
 RUN Python-${VERSION}/python -m ensurepip
@@ -32,7 +33,6 @@ RUN mkdir ext
 RUN find Python-${VERSION} -type d -name Modules | xargs -i{} bash -c "cp -r {}/* ext/"
 COPY Setup ext/Setup
 
-COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
 COPY freeze.sh .
 
 ENTRYPOINT ["/freeze.sh"]
