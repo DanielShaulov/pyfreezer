@@ -25,6 +25,7 @@ RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -
 RUN tar -xf Python-${VERSION}.tgz
 RUN cd Python-${VERSION} && ./configure --enable-optimizations
 RUN cd Python-${VERSION} && make -j$(nproc)
+RUN Python-${VERSION}/python -m ensurepip
 
 # Prepare extensions directory with all objects that usually end up in *.so modules
 RUN mkdir ext
