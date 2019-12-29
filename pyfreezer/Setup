@@ -55,6 +55,6 @@ _multiprocessing _multiprocessing/multiprocessing.c _multiprocessing/semaphore.c
 _posixshmem _multiprocessing/posixshmem.c -lrt
 _lzma _lzmamodule.c -llzma
 _opcode _opcode.c
-_hashlib _hashopenssl.c
+_hashlib _hashopenssl.c -lssl -lcrypto
 _queue _queuemodule.c
 _ctypes _ctypes/_ctypes.c _ctypes/callbacks.c _ctypes/callproc.c _ctypes/stgdict.c _ctypes/cfield.c -lffi
