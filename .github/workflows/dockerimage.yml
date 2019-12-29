@@ -12,6 +12,6 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag pyfreezer:latest
-        docker run -v ${PWD}:/code pyfreezer:latest /code/example.py
-        ./example
+        docker build pyfreezer --tag pyfreezer:latest
+        docker run -v ${PWD}/example:/code pyfreezer:latest /code/example.py
+        ./example/example
