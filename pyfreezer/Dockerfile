@@ -5,7 +5,7 @@ ARG VERSION=3.8.1
 RUN yum update -y --skip-broken && yum install -y \
     yum-utils curl \
     https://repo.ius.io/ius-release-el6.rpm \
-    https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm && yum-builddep python36u
+    https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm && yum-builddep -y python36u
 
 # Regular compilation of python from sources
 RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -o Python-${VERSION}.tgz
