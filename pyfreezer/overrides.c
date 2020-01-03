@@ -1,4 +1,6 @@
 #include <sys/select.h>
+#include <string.h>
+
 extern void __chk_fail (void) __attribute__ ((__noreturn__));
 
 long int
@@ -10,4 +12,7 @@ __fdelt_chk (long int d)
   return d / __NFDBITS;
 }
 
-__asm__(".symver memcpy,memcpy@GLIBC_2.2.5");
+void *memcpy(void *dest, const void *src, size_t n)
+{
+  memmove(dest, src, n);
+}
