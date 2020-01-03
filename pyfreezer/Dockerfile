@@ -35,6 +35,7 @@ RUN mkdir ext
 RUN find Python-${VERSION} -type d -name Modules | xargs -i{} bash -c "cp -r {}/* ext/"
 COPY Setup ext/Setup
 
+COPY overrides.c .
 COPY freeze.sh .
 
 ENTRYPOINT ["/freeze.sh"]

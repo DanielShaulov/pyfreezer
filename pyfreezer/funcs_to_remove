@@ -6,3 +6,4 @@ getrandom
 prlimit
 posix_spawn
 posix_spawnp
+explicit_bzero
