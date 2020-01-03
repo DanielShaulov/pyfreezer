@@ -1,0 +1,8 @@
+memfd_create
+copy_file_range
+preadv2
+pwritev2
+getrandom
+prlimit
+posix_spawn
+posix_spawnp

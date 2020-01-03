@@ -24,7 +24,9 @@ RUN apt-get update && apt-get install -y \
 RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -o Python-${VERSION}.tgz
 RUN tar -xf Python-${VERSION}.tgz
 COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
+COPY funcs_to_remove Python-${VERSION}/funcs_to_remove
 RUN cd Python-${VERSION} && ./configure --enable-optimizations
+RUN cd Python-${VERSION} && cat funcs_to_remove | xargs -I{} sed -i '/have_{} /Id' pyconfig.h
 RUN cd Python-${VERSION} && make -j$(nproc)
 RUN Python-${VERSION}/python -m ensurepip
 
