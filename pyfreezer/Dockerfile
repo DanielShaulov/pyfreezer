@@ -23,16 +23,17 @@ RUN apt-get update && apt-get install -y \
 # Regular compilation of python from sources
 RUN curl -L https://www.python.org/ftp/python/${VERSION}/Python-${VERSION}.tgz -o Python-${VERSION}.tgz
 RUN tar -xf Python-${VERSION}.tgz
-COPY frozenmain.c Python-${VERSION}/Python/frozenmain.c
-COPY funcs_to_remove Python-${VERSION}/funcs_to_remove
-RUN cd Python-${VERSION} && ./configure --enable-optimizations
-RUN cd Python-${VERSION} && cat funcs_to_remove | xargs -I{} sed -i '/have_{} /Id' pyconfig.h
-RUN cd Python-${VERSION} && make -j$(nproc)
-RUN Python-${VERSION}/python -m ensurepip
+RUN mv Python-${VERSION} pysrc
+RUN cd pysrc && ./configure --enable-optimizations
+COPY funcs_to_remove .
+RUN cat funcs_to_remove | xargs -I{} sed -i '/have_{} /Id' pysrc/pyconfig.h
+COPY frozenmain.c pysrc/Python/frozenmain.c
+RUN cd pysrc && make -j$(nproc)
+RUN pysrc/python -m ensurepip
 
 # Prepare extensions directory with all objects that usually end up in *.so modules
 RUN mkdir ext
-RUN find Python-${VERSION} -type d -name Modules | xargs -i{} bash -c "cp -r {}/* ext/"
+RUN find pysrc -type d -name Modules | xargs -i{} bash -c "cp -r {}/* ext/"
 COPY Setup ext/Setup
 
 COPY overrides.c .
