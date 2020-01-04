@@ -4,7 +4,7 @@
 ./pysrc/python ./pysrc/Tools/freeze/freeze.py -p $(realpath pysrc) -e $(realpath ext) -o build "$@"
 cp overrides.c build/
 export LDFLAGS="overrides.c -Wl,-Bstatic"
-cd build && make LIBS="-Wl,-Bdynamic -lutil -lm -lpthread -ldl" && cd -
+cd build && make LIBS="-Wl,-Bdynamic -lrt -lutil -lm -lpthread -ldl" && cd -
 cp build/$(basename $1 .py) $(dirname $1)
 
 # Checks
