@@ -1,5 +1,8 @@
 #include <sys/select.h>
 #include <string.h>
+#include <sys/auxv.h>
+#include <unistd.h>
+#include <sys/types.h>
 
 extern void __chk_fail (void) __attribute__ ((__noreturn__));
 
@@ -15,4 +18,12 @@ __fdelt_chk (long int d)
 void *memcpy(void *dest, const void *src, size_t n)
 {
   memmove(dest, src, n);
+}
+
+unsigned long getauxval(unsigned long type)
+{
+  if (type == AT_SECURE) {
+    return getuid() != geteuid() || getgid() != getegid();
+  }
+  return 0;
 }
