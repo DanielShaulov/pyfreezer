@@ -11,10 +11,17 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v1
+      - name: Docker login
+        run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        env:
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull latest tag
         run: docker pull danielshaulov/pyfreezer:latest
       - name: Build the Docker image
         run: docker build --cache-from danielshaulov/pyfreeze:latest pyfreezer --tag pyfreezer:latest
+      - name: Push the docker image
+        run: docker push danielshaulov/pyfreezer:latest
       - name: Freeze example
         run: docker run -v ${PWD}/example:/code pyfreezer:latest /code/example.py
       - name: Archive frozen example
