@@ -17,11 +17,9 @@ jobs:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull latest tag
-        run: |
-          docker pull danielshaulov/pyfreezer:latest
-          docker pull ubuntu:bionic-20191202
+        run: docker pull danielshaulov/pyfreezer:latest
       - name: Build the Docker image
-        run: docker build --cache-from ubuntu:bionic-20191202 --cache-from danielshaulov/pyfreezer:latest pyfreezer --tag pyfreezer:latest
+        run: docker build --cache-from danielshaulov/pyfreezer:latest pyfreezer --tag pyfreezer:latest
       - name: Push the docker image
         run: docker push danielshaulov/pyfreezer:latest
       - name: Freeze example
