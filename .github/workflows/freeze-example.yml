@@ -15,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Freeze example
-        run: docker run -v ${PWD}/example:/code pyfreezer:latest /code/example.py
+        run: docker run -v ${PWD}/example:/code danielshaulov/pyfreezer:latest /code/example.py
       - name: Archive frozen example
         uses: actions/upload-artifact@v1
         with:

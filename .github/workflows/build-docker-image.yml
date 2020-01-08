@@ -15,9 +15,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v1
       - name: Docker login
-        run: docker login --username $DOCKER_USERNAME --password $DOCKER_PASSWORD
+        run: docker login --username danielshaulov --password $DOCKER_PASSWORD
         env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       - name: Pull latest tag
         run: docker pull danielshaulov/pyfreezer:latest
