@@ -1,6 +1,9 @@
-name: Docker Image CI
+name: Build Docker Image
 
-on: [push]
+on:
+  push:
+    paths:
+      - pyfreezer/**
 
 jobs:
 
