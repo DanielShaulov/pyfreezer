@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - pyfreezer/**
+      - .github/workflows/build-docker-image.yml
 
 jobs:
 
@@ -21,11 +22,11 @@ jobs:
       - name: Pull latest tag
         run: docker pull danielshaulov/pyfreezer:latest
       - name: Build the Docker image
-        run: docker build --cache-from danielshaulov/pyfreezer:latest pyfreezer --tag pyfreezer:latest
+        run: docker build --cache-from danielshaulov/pyfreezer:latest pyfreezer -t danielshaulov/pyfreezer:latest
       - name: Push the docker image
         run: docker push danielshaulov/pyfreezer:latest
       - name: Freeze example
-        run: docker run -v ${PWD}/example:/code pyfreezer:latest /code/example.py
+        run: docker run -v ${PWD}/example:/code danielshaulov/pyfreezer:latest /code/example.py
       - name: Archive frozen example
         uses: actions/upload-artifact@v1
         with:
