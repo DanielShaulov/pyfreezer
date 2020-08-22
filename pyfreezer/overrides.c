@@ -1,8 +1,10 @@
+#define getentropy getentropy_real
 #include <sys/select.h>
 #include <string.h>
 #include <sys/auxv.h>
 #include <unistd.h>
 #include <sys/types.h>
+#undef getentropy
 
 extern void __chk_fail (void) __attribute__ ((__noreturn__));
 
@@ -27,3 +29,5 @@ unsigned long getauxval(unsigned long type)
   }
   return 0;
 }
+
+__attribute__((weak)) void *getentropy = NULL;
