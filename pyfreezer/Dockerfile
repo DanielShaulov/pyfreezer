@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     zlib1g-dev \
     libbz2-dev \
     libncurses5-dev \
+    libgpm-dev \
     libreadline6-dev \
     libsqlite3-dev \
     libssl-dev \

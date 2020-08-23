@@ -40,7 +40,7 @@ _sha512 sha512module.c
 _sha3 _sha3/sha3module.c
 _blake2 _blake2/blake2module.c _blake2/blake2b_impl.c _blake2/blake2s_impl.c
 syslog syslogmodule.c		# syslog daemon interface
-_curses _cursesmodule.c -lcurses -ltermcap
+_curses _cursesmodule.c -lcurses -ltermcap -lgpm
 _curses_panel _curses_panel.c -lpanel -lncurses
 _dbm _dbmmodule.c 	# dbm(3) may require -lndbm or similar
 _gdbm _gdbmmodule.c -I/usr/local/include -L/usr/local/lib -lgdbm
