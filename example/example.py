@@ -1,9 +1,223 @@
-print("Hello World!")
-
-import sys
-print(sys.path, sys.executable, sys.prefix)
-
-import cryptography
+# Fix requests import
 import certifi
 certifi.where = lambda: ""
+
+# Some common 3rd pary stuff
 import requests
+import docker
+
+# Eeveything under /pysrc/Lib
+# Removed __pycache__ and site-packages since they are not packages
+# Some things are commented out because they don't work
+# We don't really want to run this, but this is enough for freeze.py to find it
+if False:
+    import __future__
+    import __phello__.foo
+    import _bootlocale
+    import _collections_abc
+    import _compat_pickle
+    import _compression
+    import _dummy_thread
+    import _markupbase
+    import _osx_support
+    import _py_abc
+    import _pydecimal
+    import _pyio
+    import _sitebuiltins
+    import _strptime
+    import _threading_local
+    import _weakrefset
+    import abc
+    import aifc
+    import antigravity
+    import argparse
+    import ast
+    import asynchat
+    import asyncio
+    import asyncore
+    import base64
+    import bdb
+    import binhex
+    import bisect
+    import bz2
+    import cProfile
+    import calendar
+    import cgi
+    import cgitb
+    import chunk
+    import cmd
+    import code
+    import codecs
+    import codeop
+    import collections
+    import colorsys
+    import compileall
+    import concurrent
+    import configparser
+    import contextlib
+    import contextvars
+    import copy
+    import copyreg
+    # import crypt
+    import csv
+    import ctypes
+    import curses
+    import dataclasses
+    import datetime
+    # import dbm
+    import decimal
+    import difflib
+    import dis
+    import distutils
+    import doctest
+    import dummy_threading
+    import email
+    import encodings
+    import ensurepip
+    import enum
+    import filecmp
+    import fileinput
+    import fnmatch
+    import formatter
+    import fractions
+    import ftplib
+    import functools
+    import genericpath
+    import getopt
+    import getpass
+    import gettext
+    import glob
+    import gzip
+    import hashlib
+    import heapq
+    import hmac
+    import html
+    import http
+    import idlelib
+    import imaplib
+    import imghdr
+    import imp
+    import importlib
+    import inspect
+    import io
+    import ipaddress
+    import json
+    import keyword
+    import lib2to3
+    import linecache
+    import locale
+    import logging
+    import lzma
+    import mailbox
+    import mailcap
+    import mimetypes
+    import modulefinder
+    import msilib
+    import multiprocessing
+    import netrc
+    import nntplib
+    import ntpath
+    import nturl2path
+    import numbers
+    import opcode
+    import operator
+    import optparse
+    import os
+    import pathlib
+    import pdb
+    import pickle
+    import pickletools
+    import pipes
+    import pkgutil
+    import platform
+    import plistlib
+    import poplib
+    import posixpath
+    import pprint
+    import profile
+    import pstats
+    import pty
+    import py_compile
+    import pyclbr
+    import pydoc
+    import pydoc_data
+    import queue
+    import quopri
+    import random
+    import re
+    import reprlib
+    import rlcompleter
+    import runpy
+    import sched
+    import secrets
+    import selectors
+    # import shelve
+    import shlex
+    import shutil
+    import signal
+    import site
+    import smtpd
+    import smtplib
+    import sndhdr
+    import socket
+    import socketserver
+    import sqlite3
+    import sre_compile
+    import sre_constants
+    import sre_parse
+    import ssl
+    import stat
+    import statistics
+    import string
+    import stringprep
+    import struct
+    import subprocess
+    import sunau
+    import symbol
+    import symtable
+    import sysconfig
+    import tabnanny
+    import tarfile
+    import telnetlib
+    import tempfile
+    import test
+    import textwrap
+    import this
+    import threading
+    import timeit
+    import tkinter
+    import token
+    import tokenize
+    import trace
+    import traceback
+    import tracemalloc
+    import tty
+    import turtle
+    import turtledemo
+    import types
+    import typing
+    import unittest
+    import urllib
+    import uu
+    import uuid
+    import venv
+    import warnings
+    import wave
+    import weakref
+    import webbrowser
+    import wsgiref
+    import xdrlib
+    import xml
+    import xmlrpc
+    import zipapp
+    import zipfile
+    import zipimport
+
+if __name__ == "__main__":
+    import sys
+    import importlib.util
+    if len(sys.argv) == 2:
+        filename = sys.argv[1]
+        spec = importlib.util.spec_from_file_location("__main__", filename)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
