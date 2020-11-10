@@ -26,4 +26,4 @@ certifi.where = lambda: ""
 ```
 This will override the function that looks for the certificate file with a function that returns an empty string.  
 It works fine for making requests that are not `https`, and for `https` requests with `verify=False`.  
-If you need SSL verification - you will need to provide a path to `ca` file in that `lambda`.  
+If you need SSL verification - you will need to provide a path to `ca` file in that `lambda`, or pass the path to `verify`.  
